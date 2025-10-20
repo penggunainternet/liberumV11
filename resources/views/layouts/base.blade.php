@@ -16,7 +16,7 @@
         {{ $slot }}
     </div>
 
-    <livewire:scripts />
+    @livewireScripts
     @bukScripts(true)
 
     {{-- Background Music Player --}}

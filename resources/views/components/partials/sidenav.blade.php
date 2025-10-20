@@ -79,7 +79,7 @@
             </li>
             <li>
                 <a href="{{ '/no-replies' }}" class="flex items-center space-x-2">
-                    <x-heroicon-s-chat class="w-5 h-5 text-blue-400" />
+                    <x-heroicon-s-chat-bubble-left class="w-5 h-5 text-blue-400" />
                     <span>Belum ada balasan</span>
                 </a>
             </li>

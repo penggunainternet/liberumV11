@@ -27,43 +27,50 @@
 
                     {{-- Create --}}
                     <div class="space-y-6">
-                        <x-form action="{{ route('threads.store') }}" enctype="multipart/form-data">>
+                        <form method="POST" action="{{ route('threads.store') }}" enctype="multipart/form-data">
+                            @csrf
                             <div class="space-y-8">
 
                                 {{-- Title --}}
                                 <div>
-                                    <x-form.label for="title" value="{{ __('Judul') }}" />
-                                    <x-form.input id="title" class="block w-full mt-1" type="text" name="title" :value="old('title')" autofocus />
-                                    <x-form.error for="title" />
+                                    <x-jet-label for="title" value="{{ __('Judul') }}" />
+                                    <x-jet-input id="title" class="block w-full mt-1" type="text" name="title" :value="old('title')" autofocus />
+                                    @error('title')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 {{-- Category --}}
                                 <div>
-                                    <x-form.label for="category_id" value="{{ __('Kategori') }}" />
+                                    <x-jet-label for="category_id" value="{{ __('Kategori') }}" />
                                     <select name="category_id" id="category_id" class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                                         <option value="">Pilih Kategori</option>
                                         @foreach ($categories as $category)
                                         <option value="{{ $category->id() }}">{{ $category->name() }}</option>
                                         @endforeach
                                     </select>
-                                    <x-form.error for="category_id" />
+                                    @error('category_id')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 {{-- Body --}}
                                 <div>
-                                    <x-form.label for="body" value="{{ __('Deskripsi') }}" />
+                                    <x-jet-label for="body" value="{{ __('Deskripsi') }}" />
                                     <textarea
                                         id="body"
                                         name="body"
                                         rows="8"
                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                         placeholder="Tulis deskripsi thread Anda di sini...">{{ old('body') }}</textarea>
-                                    <x-form.error for="body" />
+                                    @error('body')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 {{-- Images Upload --}}
                                 <div>
-                                    <x-form.label for="images" value="Gambar (Opsional)" />
+                                    <x-jet-label for="images" value="Gambar (Opsional)" />
                                     <div class="mt-1">
                                         <input type="file"
                                                name="images[]"
@@ -75,8 +82,12 @@
                                         <p class="mt-1 text-xs text-gray-500">
                                             Maksimal 5 gambar, masing-masing maksimal 5MB. Total maksimal 15MB. Format: JPEG, PNG, JPG, GIF, WebP.
                                         </p>
-                                        <x-form.error for="images" />
-                                        <x-form.error for="images.*" />
+                                        @error('images')
+                                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                        @error('images.*')
+                                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     {{-- Image Preview --}}
@@ -87,13 +98,13 @@
                                 <x-buttons.primary>
                                     Buat Thread
                                 </x-buttons.primary>
-                        </x-form>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </article>
         </section>
     </main>
-    @bukScripts(true)
 
     {{-- Image Preview Script --}}
     <script>

@@ -5,7 +5,7 @@
             <x-logos.main class="w-40 mt-5 mx-32" />
         </x-slot>
 
-        <x-jet-validation-errors class="mb-4" />
+        <x-validation-errors class="mb-4" />
 
         @if (session('status'))
         <div class="mb-4 text-sm font-medium text-green-600">

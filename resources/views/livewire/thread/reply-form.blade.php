@@ -12,7 +12,7 @@
         <form wire:submit.prevent="submitReply">
             <div>
                 <input type="text"
-                       wire:model.defer="body"
+                       wire:model.blur="body"
                        class="w-full rounded-md bg-gray-200 border-none shadow-inner focus:ring-blue-400"
                        placeholder="Tulis komentar Anda..." />
                 @error('body') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror

@@ -101,7 +101,7 @@
                     <textarea class="w-full bg-gray-100 border-none shadow-inner focus:ring-blue-500 resize-none"
                               rows="3"
                               name="replyNewBody"
-                              wire:model.lazy="replyNewBody"
+                              wire:model.blur="replyNewBody"
                               x-ref="textInput"
                               placeholder="Edit balasan Anda..."></textarea>
 

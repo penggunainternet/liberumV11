@@ -192,7 +192,7 @@ return [
 
     'aliases' => [
 
-        'Active' => Rainwater\Active\ActiveFacade::class,
+        // 'Active' => Rainwater\Active\ActiveFacade::class, // Removed - package not compatible with Laravel 11
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

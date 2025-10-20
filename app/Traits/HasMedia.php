@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 trait HasMedia
 {
@@ -45,8 +46,11 @@ trait HasMedia
         $optimizedSize = $file->getSize(); // Default to original size
 
         if ($this->isImageFile($file)) {
-            // Process image with Intervention Image
-            $image = Image::make($file);
+            // Initialize ImageManager with GD driver
+            $manager = new ImageManager(new Driver());
+
+            // Read image
+            $image = $manager->read($file->getPathname());
 
             // Get original dimensions
             $originalWidth = $image->width();
@@ -54,28 +58,26 @@ trait HasMedia
 
             // Resize if image is too large (max width: 1920px, max height: 1080px)
             if ($originalWidth > 1920 || $originalHeight > 1080) {
-                $image->resize(1920, 1080, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize(); // Prevent upsizing
-                });
+                $image->scale(width: 1920, height: 1080);
             }
 
-            // Compress image based on file type
+            // Get compression quality
             $quality = $this->getCompressionQuality($file->getMimeType());
 
+            // Save optimized image with appropriate format and quality
             if (in_array($file->getMimeType(), ['image/jpeg', 'image/jpg'])) {
-                $image->encode('jpg', $quality);
+                $image->toJpeg($quality)->save($fullPath);
             } elseif ($file->getMimeType() === 'image/png') {
-                $image->encode('png');
+                $image->toPng()->save($fullPath);
             } elseif ($file->getMimeType() === 'image/webp') {
-                $image->encode('webp', $quality);
+                $image->toWebp($quality)->save($fullPath);
+            } else {
+                // Default save for other image types
+                $image->save($fullPath);
             }
 
-            // Save optimized image
-            $image->save($fullPath);
-
             // Create thumbnail
-            $this->createThumbnail($image, $collection, $filename);
+            $this->createThumbnail($manager, $file->getPathname(), $collection, $filename);
 
             // Get file size after optimization
             $optimizedSize = filesize($fullPath);
@@ -97,7 +99,7 @@ trait HasMedia
     /**
      * Create thumbnail for image
      */
-    private function createThumbnail($image, string $collection, string $filename): void
+    private function createThumbnail(ImageManager $manager, string $sourcePath, string $collection, string $filename): void
     {
         $thumbnailDir = $collection . '/thumbnails/';
         $thumbnailPath = storage_path('app/public/' . $thumbnailDir);
@@ -107,15 +109,14 @@ trait HasMedia
             mkdir($thumbnailPath, 0755, true);
         }
 
-        // Create thumbnail (300x300 max)
-        $thumbnail = clone $image;
-        $thumbnail->resize(300, 300, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
+        // Read and create thumbnail (300x300 max)
+        $thumbnail = $manager->read($sourcePath);
+        $thumbnail->scale(width: 300, height: 300);
 
         $thumbnailFilePath = $thumbnailPath . $filename;
-        $thumbnail->save($thumbnailFilePath, 80); // 80% quality for thumbnails
+
+        // Save thumbnail with 80% quality
+        $thumbnail->toJpeg(80)->save($thumbnailFilePath);
     }
 
     /**

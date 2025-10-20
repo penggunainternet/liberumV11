@@ -60,17 +60,19 @@
 
                 <div class="w-full">
                     @if(auth()->user()->isFollowing($user))
-                    <x-form action="{{ route('follow', $user) }}">
+                    <form method="POST" action="{{ route('follow', $user) }}">
+                        @csrf
                         <x-jet-button2>
                             {{ __('Batal Ikuti') }}
                         </x-jet-button2>
-                    </x-form>
+                    </form>
                     @else
-                    <x-form action="{{ route('follow', $user) }}">
+                    <form method="POST" action="{{ route('follow', $user) }}">
+                        @csrf
                         <x-jet-button2>
                             {{ __('Ikuti') }}
                         </x-jet-button2>
-                    </x-form>
+                    </form>
                     @endif
                 </div>
                 @endunless

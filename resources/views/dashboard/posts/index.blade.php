@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="flex items-center space-x-1">
-                                    <x-heroicon-o-chat-alt class="w-4 h-4" />
+                                    <x-heroicon-o-chat-bubble-left class="w-4 h-4" />
                                     <span>{{ $post->repliesCount() }} replies</span>
                                 </div>
 

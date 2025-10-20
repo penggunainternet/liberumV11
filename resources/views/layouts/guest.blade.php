@@ -27,7 +27,7 @@
     {{-- @bukScripts(true) --}}
 
     {{-- Livewire --}}
-    <livewire:scripts />
+    @livewireScripts
 
 </body>
 

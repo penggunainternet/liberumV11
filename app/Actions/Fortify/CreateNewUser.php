@@ -3,8 +3,6 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
-use Illuminate\Support\Str;
-use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -17,26 +15,34 @@ class CreateNewUser implements CreatesNewUsers
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array  $input
-     * @return \App\Models\User
+     * @param  array<string, string>  $input
      */
-    public function create(array $input)
+    public function create(array $input): User
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:100', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                'alpha_dash',
+                Rule::unique(User::class),
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class),
+            ],
             'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
         return User::create([
-            'name'      => $input['name'],
-            'username'  => $input['username'],
-            'slug'      => Str::slug($input['name']),
-            'email'     => $input['email'],
-            'password'  => Hash::make($input['password']),
+            'name' => $input['name'],
+            'username' => $input['username'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
         ]);
     }
-
 }

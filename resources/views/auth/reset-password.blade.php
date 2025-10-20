@@ -4,7 +4,7 @@
             <x-logos.main class="w-40 mt-5 mx-32" />
         </x-slot>
 
-        <x-jet-validation-errors class="mb-4" />
+        <x-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('password.update') }}">
             @csrf

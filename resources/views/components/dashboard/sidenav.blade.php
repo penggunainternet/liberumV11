@@ -67,7 +67,7 @@
             @if(auth()->user()->isAdmin())
             <div>
                 <x-sidenav.link href="{{ route('admin.threads.pending') }}" :active="request()->routeIs('admin.threads.*')">
-                    <x-heroicon-o-clipboard-list class="w-4 ml-2 mr-3" style="color:#FC9B5C;"/>
+                    <x-heroicon-o-clipboard-document-list class="w-4 ml-2 mr-3" style="color:#FC9B5C;"/>
                     <span>{{ __('Kelola Thread') }}</span>
                     @php
                         $pendingCount = App\Models\Thread::pending()
@@ -97,7 +97,7 @@
                     @csrf
 
                     <x-sidenav.link href="{{ route('logout') }}" onclick="event.preventDefault();                                               this.closest('form').submit();">
-                        <x-heroicon-o-logout class="w-4 ml-2 mr-3" style="color:#FC9B5C;"/>
+                        <x-heroicon-o-arrow-right-on-rectangle class="w-4 ml-2 mr-3" style="color:#FC9B5C;"/>
                         <span>{{ __('Keluar') }}</span>
                     </x-sidenav.link>
 

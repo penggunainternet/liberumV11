@@ -78,7 +78,7 @@
 
                             {{-- Form Container --}}
                             <div class="px-6 py-6">
-                                <x-jet-validation-errors class="mb-4" />        <form method="POST" action="{{ route('register') }}">
+                                <x-validation-errors class="mb-4" />        <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div>

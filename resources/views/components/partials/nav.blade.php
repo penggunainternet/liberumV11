@@ -18,7 +18,7 @@
                 <div class="flex items-center flex-grow ">
                     {{-- Route/Http : route('search', 1) --}}
                     <button id="searchButton" class="p-2 text-white bg-yellow-400 border rounded-l focus:outline-none hover:bg-yellow-500">
-                        <x-heroicon-o-search class="w-6 h-6" />
+                        <x-heroicon-o-magnifying-glass class="w-6 h-6" />
                     </button>
                     <input type="search" name="search" id="" class="w-full border-none rounded-r shadow-inner bg-yellow-50 focus:ring-yellow-200" placeholder="Cari Topik">
                 </div>
