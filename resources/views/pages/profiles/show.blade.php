@@ -62,16 +62,16 @@
                     @if(auth()->user()->isFollowing($user))
                     <form method="POST" action="{{ route('follow', $user) }}">
                         @csrf
-                        <x-jet-button2>
+                        <x-jet-button class="w-full justify-center">
                             {{ __('Batal Ikuti') }}
-                        </x-jet-button2>
+                        </x-jet-button>
                     </form>
                     @else
                     <form method="POST" action="{{ route('follow', $user) }}">
                         @csrf
-                        <x-jet-button2>
+                        <x-jet-button class="w-full justify-center">
                             {{ __('Ikuti') }}
-                        </x-jet-button2>
+                        </x-jet-button>
                     </form>
                     @endif
                 </div>

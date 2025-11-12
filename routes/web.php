@@ -44,8 +44,9 @@ Route::group(['prefix' => 'threads', 'as' => 'threads.'], function () {
     Route::post('/{thread:slug}', [ThreadController::class, 'update'])->name('update');
     Route::get('/{category:slug}/{thread:slug}', [ThreadController::class, 'show'])->name('show');
 
-    Route::get('/{category:slug}/{thread:slug}/subscribe', [ThreadController::class, 'subscribe'])->name('subscribe');
-    Route::get('/{category:slug}/{thread:slug}/unsubscribe', [ThreadController::class, 'unsubscribe'])->name('unsubscribe');
+    // Subscription routes temporarily disabled
+    // Route::get('/{category:slug}/{thread:slug}/subscribe', [ThreadController::class, 'subscribe'])->name('subscribe');
+    // Route::get('/{category:slug}/{thread:slug}/unsubscribe', [ThreadController::class, 'unsubscribe'])->name('unsubscribe');
     Route::get('/{category:slug}', [ThreadController::class, 'sortByCategory'])->name('sort');
 });
 

@@ -15,32 +15,17 @@
                 Buat postingan baru untuk memulai topik.
             </p>
         </div>
+        {{-- Subscription features temporarily disabled
         @auth
         @if(request()->routeIs('threads.show'))
         <div class="pb-4 space-y-4">
-
-            @can(App\Policies\ThreadPolicy::UNSUBSCRIBE, $thread)
-            {{-- Unubscribe to thread button --}}
-            <x-links.main href="{{ route('threads.unsubscribe', [$thread->category->slug(), $thread->slug()]) }}">
-                {{ __('Berhenti berlangganan') }}
-            </x-links.main>
-            <p class="text-sm text-gray-500 ">
-                Berhenti Berlangganan ke topik ini.
+            <p class="text-sm text-gray-500">
+                Fitur berlangganan sedang dinonaktifkan.
             </p>
-
-            @elsecan(App\Policies\ThreadPolicy::SUBSCRIBE, $thread)
-            {{-- Subscribe to thread button --}}
-            <x-links.main href="{{ route('threads.subscribe', [$thread->category->slug(), $thread->slug()]) }}">
-                {{ __('Berlangganan topik ini') }}
-            </x-links.main>
-            <p class="text-sm text-gray-500 ">
-                Berlangganan ke topik ini.
-            </p>
-            @endcan
-
         </div>
         @endif
         @endauth
+        --}}
     </div>
 
     {{-- Categories --}}

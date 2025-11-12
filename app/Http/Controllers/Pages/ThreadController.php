@@ -168,9 +168,12 @@ class ThreadController extends Controller
     public function thisWeek()
     {
         $threads = Thread::approved()
-            ->leftJoin('views', 'views.viewable_id', '=', 'threads.id')
+            ->leftJoin('views', function($join) {
+                $join->on('views.viewable_id', '=', 'threads.id')
+                     ->where('views.viewable_type', '=', Thread::class);
+            })
             ->selectRaw('threads.*, COUNT(views.viewable_id) AS view_count')
-            ->whereBetween('threads.created_at', [Carbon::now()->subWeek()->format("Y-m-d H:i:s"), Carbon::now()])
+            ->whereBetween('threads.created_at', [Carbon::now()->subWeek()->format("Y-m-d H:i:s"), Carbon::now()->format("Y-m-d H:i:s")])
             ->groupBy('threads.id')
             ->orderByDesc('view_count');
 
@@ -182,7 +185,10 @@ class ThreadController extends Controller
     public function allTime()
     {
         $threads = Thread::approved()
-            ->leftJoin('views', 'views.viewable_id', '=', 'threads.id')
+            ->leftJoin('views', function($join) {
+                $join->on('views.viewable_id', '=', 'threads.id')
+                     ->where('views.viewable_type', '=', Thread::class);
+            })
             ->selectRaw('threads.*, COUNT(views.viewable_id) AS view_count')
             ->groupBy('threads.id')
             ->orderByDesc('view_count');
@@ -195,7 +201,10 @@ class ThreadController extends Controller
     public function zeroComment()
     {
         $threads = Thread::approved()
-            ->leftJoin('replies', 'replies.replyable_id', '=', 'threads.id')
+            ->leftJoin('replies', function($join) {
+                $join->on('replies.replyable_id', '=', 'threads.id')
+                     ->where('replies.replyable_type', '=', Thread::class);
+            })
             ->selectRaw('threads.*')
             ->groupBy('threads.id')
             ->whereNull('replies.replyable_id')

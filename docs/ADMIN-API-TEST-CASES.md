@@ -1,0 +1,43 @@
+Tabel 4.1 Hasil Pengujian Fungsionalitas API Backend
+
+| No  | Modul       | Skenario Pengujian                                                          | Hasil yang Diharapkan              | Deskripsi                                                               |
+| --- | ----------- | --------------------------------------------------------------------------- | ---------------------------------- | ----------------------------------------------------------------------- |
+| 1.  | Login       | Request: POST ke http://localhost:3000/api/login                            | Berhasil login, menerima token JWT | Login berhasil.                                                         |
+|     |             | Body (JSON): {"email": "user@example.com", "password": "pass123"}           | dalam respons                      | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body (JSON): {"message": "Login successful", "token": "jwt..."} |
+| 2.  | Register    | Request: POST ke http://localhost:3000/api/register                         | Berhasil registrasi, akun baru     | Registrasi berhasil.                                                    |
+|     |             | Body (JSON): {"name": "User", "email": "new@ex.com", "password": "pass123"} | dibuat dalam sistem                | Status: 201 Created                                                     |
+|     |             |                                                                             |                                    | Respons Body (JSON): {"message": "Registration success"}                |
+| 3.  | Admin Users | Request: GET ke http://localhost:3000/api/admin/users/active                | Daftar user aktif diterima         | Pengambilan daftar user aktif.                                          |
+|     |             | Headers: Authorization: Bearer {token}                                      | dalam format JSON                  | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"users": [{...}]}                                        |
+| 4.  | Admin Users | Request: POST ke http://localhost:3000/api/admin/users/1/promote            | User berhasil dipromosikan         | Promosi user menjadi admin.                                             |
+|     |             | Headers: Authorization: Bearer {token}                                      | menjadi admin                      | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"message": "User promoted"}                              |
+| 5.  | Admin Users | Request: POST ke http://localhost:3000/api/admin/users/1/demote             | User berhasil diturunkan           | Menurunkan role admin ke user.                                          |
+|     |             | Headers: Authorization: Bearer {token}                                      | menjadi user biasa                 | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"message": "User demoted"}                               |
+| 6.  | Admin Users | Request: DELETE ke http://localhost:3000/api/admin/users/1                  | User berhasil dihapus              | Penghapusan user dari sistem.                                           |
+|     |             | Headers: Authorization: Bearer {token}                                      | dari sistem                        | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"message": "User deleted"}                               |
+| 7.  | Moderasi    | Request: GET ke http://localhost:3000/api/admin/threads/pending             | Daftar thread pending              | Pengambilan thread pending.                                             |
+|     |             | Headers: Authorization: Bearer {token}                                      | moderasi diterima                  | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"threads": [{...}]}                                      |
+| 8.  | Moderasi    | Request: POST ke http://localhost:3000/api/admin/threads/1/approve          | Thread berhasil                    | Thread disetujui moderator.                                             |
+|     |             | Headers: Authorization: Bearer {token}                                      | disetujui                          | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"message": "Thread approved"}                            |
+| 9.  | Moderasi    | Request: POST ke http://localhost:3000/api/admin/threads/1/reject           | Thread berhasil                    | Thread ditolak moderator.                                               |
+|     |             | Headers: Authorization: Bearer {token}                                      | ditolak                            | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"message": "Thread rejected"}                            |
+| 10. | Kategori    | Request: POST ke http://localhost:3000/api/admin/categories                 | Kategori baru berhasil             | Pembuatan kategori baru.                                                |
+|     |             | Headers: Authorization: Bearer {token}                                      | dibuat                             | Status: 201 Created                                                     |
+|     |             | Body (JSON): {"name": "Kategori Baru"}                                      |                                    | Respons Body: {"category": {...}}                                       |
+| 11. | Kategori    | Request: PUT ke http://localhost:3000/api/admin/categories/1                | Kategori berhasil                  | Update data kategori.                                                   |
+|     |             | Headers: Authorization: Bearer {token}                                      | diupdate                           | Status: 200 OK                                                          |
+|     |             | Body (JSON): {"name": "Nama Baru"}                                          |                                    | Respons Body: {"category": {...}}                                       |
+| 12. | Kategori    | Request: DELETE ke http://localhost:3000/api/admin/categories/1             | Kategori berhasil                  | Penghapusan kategori.                                                   |
+|     |             | Headers: Authorization: Bearer {token}                                      | dihapus                            | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"message": "Category deleted"}                           |
+| 13. | Dashboard   | Request: GET ke http://localhost:3000/api/admin/dashboard                   | Data statistik diterima            | Pengambilan data dashboard.                                             |
+|     |             | Headers: Authorization: Bearer {token}                                      |                                    | Status: 200 OK                                                          |
+|     |             |                                                                             |                                    | Respons Body: {"stats": {...}}                                          |

@@ -1,0 +1,51 @@
+No,Endpoint,Method,Deskripsi,Response
+1,/api/register,POST,Registrasi user baru,Token dan data user baru
+2,/api/login,POST,Autentikasi pengguna,Token dan data user
+3,/api/logout,POST,Logout pengguna,Status logout
+4,/api/me,GET,Data profil user,Data user yang login
+5,/api/threads,GET,Mengambil daftar thread,JSON array threads + pagination
+6,/api/threads,POST,Membuat thread baru,Status dan data thread
+7,/api/threads/{id},GET,Detail thread,Data lengkap thread
+8,/api/threads/{id},PUT,Update thread,Status dan data update
+9,/api/threads/{id},DELETE,Hapus thread,Status hapus
+10,/api/reply,GET,Daftar semua reply,JSON array replies
+11,/api/reply,POST,Membuat reply baru,Status dan data reply
+12,/api/reply/{id},PUT,Update reply,Status dan data update
+13,/api/reply/{id},DELETE,Hapus reply,Status hapus
+14,/api/categories,GET,Daftar kategori,JSON array categories
+15,/api/categories,POST,Tambah kategori baru,Status dan data kategori
+16,/api/categories/{id},GET,Detail kategori,Data kategori + threads
+17,/api/categories/{id},PUT,Update kategori,Status dan data update
+18,/api/categories/{id},DELETE,Hapus kategori,Status hapus
+19,/api/follow/{user},POST,Follow/unfollow user,Status follow/unfollow
+20,/api/like/{thread},POST,Like/unlike thread,Status like/unlike
+21,/api/notifications,GET,Daftar notifikasi,JSON array notifications
+22,/api/notifications/mark-read,POST,Tandai notifikasi dibaca,Status update
+23,/api/search/threads,GET,Cari thread,JSON array hasil pencarian
+24,/api/user/{id}/threads,GET,Thread by user,JSON array thread user
+25,/api/user/{id}/replies,GET,Reply by user,JSON array reply user
+26,/api/user/{id}/followers,GET,Daftar follower user,JSON array followers
+27,/api/user/{id}/following,GET,Daftar following user,JSON array following
+28,/api/thread/{id}/likes,GET,Daftar like thread,JSON array users yang like
+29,/api/upload/image,POST,Upload gambar,URL dan data gambar
+30,/api/thread/{id}/views,GET,Jumlah view thread,Data statistik view
+31,/api/admin/dashboard,GET,Statistik dashboard admin,Data statistik & ringkasan
+32,/api/admin/users/active,GET,Daftar user aktif,JSON array users aktif
+33,/api/admin/users/{id}/promote,POST,Promosi user menjadi admin,Status dan data update
+34,/api/admin/users/{id}/demote,POST,Menurunkan role admin ke user,Status dan data update
+35,/api/admin/users/{id}/delete,DELETE,Hapus user,Status hapus
+36,/api/admin/threads/pending,GET,Daftar thread pending moderasi,JSON array threads pending
+37,/api/admin/threads/approved,GET,Daftar thread yang disetujui,JSON array threads approved
+38,/api/admin/threads/rejected,GET,Daftar thread yang ditolak,JSON array threads rejected
+39,/api/admin/threads/{id},GET,Detail thread untuk moderasi,Data lengkap thread
+40,/api/admin/threads/{id}/approve,POST,Menyetujui thread,Status dan data approve
+41,/api/admin/threads/{id}/reject,POST,Menolak thread,Status dan data reject
+42,/api/admin/categories,GET,Manajemen kategori,JSON array categories
+43,/api/admin/categories/create,GET,Form tambah kategori,Form data kategori
+44,/api/admin/categories,POST,Simpan kategori baru,Status dan data kategori
+45,/api/admin/categories/{id}/edit,GET,Form edit kategori,Form data kategori
+46,/api/admin/categories/{id},PUT,Update kategori,Status dan data update
+47,/api/admin/categories/{id},DELETE,Hapus kategori,Status hapus
+48,/api/user/{id}/threads,GET,Thread by user,JSON array thread user
+49,/api/follow/{user},POST,Follow user,Status follow/unfollow
+50,/api/follow/{user},DELETE,Unfollow user,Status follow/unfollow
