@@ -16,8 +16,8 @@ class Index extends Component
 
     public function mount()
     {
-        // Otomatis mark all unread notifications as read ketika halaman dimuat
-        Auth::user()->unreadNotifications->markAsRead();
+        // Mark all unread notifications as read when page loads
+        Auth::user()->unreadNotifications()->update(['read_at' => now()]);
     }
 
     public function render()
