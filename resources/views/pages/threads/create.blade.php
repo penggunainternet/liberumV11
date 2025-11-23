@@ -46,7 +46,9 @@
                                     <select name="category_id" id="category_id" class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                                         <option value="">Pilih Kategori</option>
                                         @foreach ($categories as $category)
-                                        <option value="{{ $category->id() }}">{{ $category->name() }}</option>
+                                            @if(auth()->user()->isAdmin() || $category->slug() !== 'peraturan')
+                                                <option value="{{ $category->id() }}">{{ $category->name() }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     @error('category_id')

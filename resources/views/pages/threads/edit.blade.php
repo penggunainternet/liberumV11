@@ -52,9 +52,11 @@
                                     <x-jet-label for="category_id" value="{{ __('Kategori') }}" />
                                     <select name="category_id" id="category_id" class="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                                         @foreach ($categories as $category)
-                                        <option value="{{ $category->id() }}" @if($category->id() == $selectedCategory->id) selected @endif>
-                                            {{ $category->name() }}
-                                        </option>
+                                            @if(auth()->user()->isAdmin() || $category->slug() !== 'peraturan')
+                                                <option value="{{ $category->id() }}" @if($category->id() == $selectedCategory->id) selected @endif>
+                                                    {{ $category->name() }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     @error('category_id')
